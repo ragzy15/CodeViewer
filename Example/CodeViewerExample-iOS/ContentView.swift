@@ -18,13 +18,10 @@ struct ContentView: View {
         """
     
     var body: some View {
-        CodeViewer(
+        CVCodeEditor(
             content: $json,
             mode: .json,
-            darkTheme: .solarized_dark,
-            lightTheme: .solarized_light,
-            isReadOnly: true,
-            fontSize: 54
+            theme: .individual(light: .solarized_light, dark: .solarized_dark)
         )
         .onAppear {
             json = """

@@ -31,13 +31,11 @@ struct ContentView: View {
     @State private var json = ""
     
     var body: some View {
-        CodeViewer(
+        CVCodeEditor(
             content: $json,
             mode: .json,
-            darkTheme: .solarized_dark,
-            lightTheme: .solarized_light,
-            isReadOnly: true,
-            fontSize: 54
+            theme: .individual(light: .solarized_light, dark: .solarized_dark)
+            isReadOnly: true
         )
         .onAppear {
             json = """
@@ -52,5 +50,6 @@ struct ContentView: View {
 ```
 
 ## Requirement
-- iOS >= v13
-- macOS >= v10.15
+- iOS >= v10
+- macOS >= v10.11
+- Xcode >= 12.0

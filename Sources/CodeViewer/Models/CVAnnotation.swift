@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  CVAnnotation.swift
+//  CodeViewer
 //
 //  Created by Phuc on 07/10/2020.
 //
@@ -12,7 +12,8 @@ import Foundation
 //row: 8
 //text: "Expected an identifier and instead saw 'var'."
 //type: "error"
-public struct Annotation: Decodable {
+public struct CVAnnotation: Decodable {
+    
     enum AnnotationType: String, Decodable {
         case error
         case warning
@@ -25,7 +26,7 @@ public struct Annotation: Decodable {
     let type: AnnotationType
 }
 
-extension Annotation {
+extension CVAnnotation {
     init?(dict: [String: Any]) {
         guard
             let column = dict["column"] as? Int,

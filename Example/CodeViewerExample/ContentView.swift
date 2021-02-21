@@ -18,15 +18,11 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            CodeViewer(
+            CVCodeEditor(
                 content: $json,
                 mode: .json,
-                darkTheme: .solarized_dark,
-                lightTheme: .solarized_light,
-                fontSize: 13
-            ) { text in
-                print("new text: \(text)")
-            }
+                theme: .individual(light: .solarized_light, dark: .solarized_dark)
+            )
             
             Button(action: { print(json)} ) {
                 Label("Json", systemImage: "pencil")
