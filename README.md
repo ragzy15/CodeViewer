@@ -50,6 +50,6 @@ struct ContentView: View {
 ```
 
 ## Requirement
-- iOS >= v10
+- iOS >= v11
 - macOS >= v10.11
 - Xcode >= 12.0

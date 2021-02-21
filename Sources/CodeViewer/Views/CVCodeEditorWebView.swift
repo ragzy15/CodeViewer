@@ -25,11 +25,16 @@ public class CVCodeEditorWebView: CVView {
         configuration.userContentController = userController
         let webView = WKWebView(frame: bounds, configuration: configuration)
         
+        webView.allowsLinkPreview = false
+        webView.navigationDelegate = self
+        webView.allowsBackForwardNavigationGestures = false
+        
         #if os(macOS)
         webView.setValue(true, forKey: "drawsTransparentBackground") // Prevent white flick
         #elseif os(iOS)
         webView.isOpaque = false
         webView.scrollView.delegate = self
+        webView.scrollView.bounces = false
         webView.scrollView.backgroundColor = .clear
         webView.backgroundColor = .clear
         #endif
@@ -173,6 +178,17 @@ extension CVCodeEditorWebView {
             callJavascriptFunction(function: CVJavascriptFunction(functionString: javascriptString, callback: callback))
         } else {
             addFunction(function: CVJavascriptFunction(functionString: javascriptString, callback: callback))
+        }
+    }
+}
+
+extension CVCodeEditorWebView: WKNavigationDelegate {
+    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.request.url?.isFileURL == true {
+            decisionHandler(.allow)
+        } else {
+            decisionHandler(.cancel)
         }
     }
 }

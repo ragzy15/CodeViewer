@@ -122,7 +122,7 @@ extension CVCodeEditor {
 }
 
 @available(iOS 13.0, macOS 10.15, *)
-struct CVCodeEditor_Previews : PreviewProvider {
+struct CVCodeEditor_Previews: PreviewProvider {
     static private var jsonString = """
     {
         "hello": "world"
